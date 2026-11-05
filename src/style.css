@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   BASE — Dark mode defaults (unchanged)
+───────────────────────────────────────── */
+@layer base {
+  html { scroll-behavior: smooth; background: #0A0A0A; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #0A0A0A;
+    color: #E2E8F0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Light mode base overrides */
+  html.light body {
+    background-color: #FFFFFF;
+    color: #1E293B;
+  }
+  html.light {
+    background: #FFFFFF;
+  }
+
+  ::selection { background: rgba(249,115,22,0.3); color: #fff; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #0A0A0A; }
+  html.light ::-webkit-scrollbar-track { background: #F1F5F9; }
+  ::-webkit-scrollbar-thumb { background: #F97316; border-radius: 4px; }
+  :focus-visible { outline: 2px solid #F97316; outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+/* ─────────────────────────────────────────
+   UTILITIES — Dark defaults + light overrides
+───────────────────────────────────────── */
+@layer utilities {
+
+  /* Orange gradient text — same in both modes */
+  .text-orange-grad {
+    background: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  html.light .bg-grid {
+    background-image:
+      linear-gradient(rgba(249,115,22,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(249,115,22,0.06) 1px, transparent 1px);
+  }
+
+  /* ── Card ── */
+  .card-dark {
+    background: #1A1A1A;
+    border: 1px solid #2A2A2A;
+    border-radius: 12px;
+  }
+  html.light .card-dark {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  .card-dark-hover {
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  .card-dark-hover:hover {
+    border-color: rgba(249,115,22,0.4);
+    box-shadow: 0 0 30px rgba(249,115,22,0.08);
+    transform: translateY(-2px);
+  }
+  html.light .card-dark-hover:hover {
+    border-color: rgba(249,115,22,0.5);
+    box-shadow: 0 4px 20px rgba(249,115,22,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* ── Buttons — unchanged in both modes ── */
+  .btn-orange {
+    background: linear-gradient(135deg, #F97316, #EA580C);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(249,115,22,0.3);
+  }
+  .btn-orange:hover {
+    box-shadow: 0 0 40px rgba(249,115,22,0.5);
+    transform: translateY(-1px);
+  }
+  .btn-outline {
+    border: 1px solid rgba(249,115,22,0.5);
+    color: #F97316;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover {
+    background: rgba(249,115,22,0.1);
+    border-color: #F97316;
+  }
+
+  /* ── Layout ── */
+  .section-pad { @apply py-16 sm:py-20 lg:py-24 px-6 sm:px-8 lg:px-12; }
+  .container-xl { @apply max-w-7xl mx-auto; }
+
+  /* ── Section label — orange, same in both ── */
+  .section-label {
+    @apply text-xs font-mono tracking-[0.25em] uppercase text-orange-500 mb-3 block;
+  }
+
+  /* ── Section title ── */
+  .section-title {
+    @apply text-4xl sm:text-5xl font-black;
+    color: #FFFFFF;
+  }
+  html.light .section-title {
+    color: #1E293B;
+  }
+
+  /* ── Skill tag ── */
+  .tag {
+    @apply text-xs font-mono px-2.5 py-1 rounded-md;
+    background: rgba(249,115,22,0.12);
+    border: 1px solid rgba(249,115,22,0.2);
+    color: #FB923C;
+  }
+  html.light .tag {
+    background: rgba(249,115,22,0.08);
+    border: 1px solid rgba(249,115,22,0.25);
+    color: #EA580C;
+  }
+
+  /* ── Skill bar track ── */
+  .skill-bar-track {
+    height: 6px;
+    background: #2A2A2A;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  html.light .skill-bar-track {
+    background: #E2E8F0;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #F97316, #FB923C);
+    transition: width 1.5s ease;
+  }
+}
